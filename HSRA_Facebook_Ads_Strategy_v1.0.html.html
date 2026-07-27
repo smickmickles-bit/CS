@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HSRA Facebook Ads Strategy v1.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f5f7fa;
+            color: #1a2a4a;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            padding: 50px 60px;
+        }
+
+        .header {
+            border-bottom: 4px solid #2d8f8f;
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a2a4a;
+            letter-spacing: -0.5px;
+        }
+
+        .header .subtitle {
+            font-size: 18px;
+            color: #4a5a7a;
+            font-weight: 400;
+            margin-top: 6px;
+        }
+
+        .header .meta {
+            font-size: 14px;
+            color: #7a8a9a;
+            margin-top: 10px;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .header .meta span {
+            background: #f0f2f5;
+            padding: 4px 14px;
+            border-radius: 20px;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: #2d8f8f;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .slide {
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e8ecf2;
+        }
+
+        .slide:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .slide-number {
+            font-size: 12px;
+            font-weight: 600;
+            color: #2d8f8f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .slide h2 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1a2a4a;
+            margin-bottom: 18px;
+            border-left: 4px solid #2d8f8f;
+            padding-left: 16px;
+        }
+
+        .slide h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a2a4a;
+            margin: 24px 0 10px 0;
+        }
+
+        .slide h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a2a4a;
+            margin: 16px 0 6px 0;
+        }
+
+        .slide p {
+            color: #3a4a5a;
+            margin-bottom: 14px;
+            font-size: 16px;
+        }
+
+        .highlight-box {
+            background: #f0f7f7;
+            border-left: 4px solid #2d8f8f;
+            padding: 18px 24px;
+            border-radius: 6px;
+            margin: 16px 0;
+            font-size: 16px;
+            color: #1a2a4a;
+            font-weight: 500;
+        }
+
+        .highlight-box strong {
+            color: #1a2a4a;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin: 16px 0;
+            border-radius: 8px;
+            border: 1px solid #e8ecf2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 500px;
+        }
+
+        table th {
+            background: #1a2a4a;
+            color: #fff;
+            font-weight: 600;
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        table td {
+            padding: 11px 16px;
+            border-bottom: 1px solid #e8ecf2;
+            color: #2a3a4a;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .budget-tier {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .tier-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid #e8ecf2;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+
+        .tier-card.recommended {
+            border-color: #2d8f8f;
+            background: #f0f8f6;
+        }
+
+        .tier-card h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .tier-card .price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a2a4a;
+            margin: 8px 0;
+        }
+
+        .tier-card .price small {
+            font-size: 14px;
+            font-weight: 400;
+            color: #5a6a7a;
+        }
+
+        .tier-card ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            font-size: 13px;
+            color: #3a4a5a;
+        }
+
+        .tier-card ul li {
+            padding: 4px 0;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        .tier-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .tier-card .badge-rec {
+            display: inline-block;
+            background: #2d8f8f;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 6px;
+        }
+
+        .budget-bar {
+            height: 16px;
+            background: #e8ecf2;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 8px 0;
+            position: relative;
+        }
+
+        .budget-bar .fill {
+            height: 100%;
+            border-radius: 10px;
+            background: #2d8f8f;
+        }
+
+        .budget-bar .fill.lean {
+            width: 30%;
+            background: #8a9aaa;
+        }
+        .budget-bar .fill.recommended {
+            width: 55%;
+            background: #2d8f8f;
+        }
+        .budget-bar .fill.full {
+            width: 100%;
+            background: #1a2a4a;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 16px 0;
+        }
+
+        .col {
+            background: #f8fafc;
+            padding: 18px 22px;
+            border-radius: 10px;
+            border: 1px solid #e8ecf2;
+        }
+
+        .col h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a2a4a;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #2d8f8f;
+            padding-bottom: 8px;
+        }
+
+        .col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .col ul li {
+            padding: 5px 0;
+            border-bottom: 1px solid #edf0f4;
+            font-size: 14px;
+            color: #2a3a4a;
+        }
+
+        .col ul li:last-child {
+            border-bottom: none;
+        }
+
+        .col ul li strong {
+            color: #1a2a4a;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-high {
+            background: #1a2a4a;
+            color: #fff;
+        }
+
+        .badge-medium {
+            background: #2d8f8f;
+            color: #fff;
+        }
+
+        .badge-low {
+            background: #d0d6e0;
+            color: #3a4a5a;
+        }
+
+        .badge-rec-small {
+            background: #2d8f8f;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hub-spoke {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .hub {
+            background: #1a2a4a;
+            color: #fff;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .hub small {
+            display: block;
+            font-weight: 400;
+            font-size: 13px;
+            color: #9aabba;
+        }
+
+        .spoke-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 12px 0;
+        }
+
+        .spoke {
+            background: #f0f4f8;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1a2a4a;
+            border: 1px solid #dce2ea;
+        }
+
+        .spoke.primary {
+            border-color: #2d8f8f;
+            background: #e8f4f4;
+        }
+
+        .arrow-down {
+            font-size: 24px;
+            color: #7a8a9a;
+            margin: 4px 0;
+        }
+
+        .timeline-visual {
+            display: flex;
+            gap: 4px;
+            margin: 12px 0;
+            flex-wrap: wrap;
+        }
+
+        .timeline-visual .month {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #e8ecf2;
+            color: #5a6a7a;
+        }
+
+        .timeline-visual .month.active {
+            background: #2d8f8f;
+            color: #fff;
+        }
+
+        .timeline-visual .month.spike {
+            background: #1a2a4a;
+            color: #fff;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #e8ecf2;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #7a8a9a;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 18px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .budget-tier {
+                grid-template-columns: 1fr;
+            }
+
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .hub {
+                font-size: 16px;
+                padding: 12px 20px;
+            }
+
+            .spoke {
+                font-size: 12px;
+                padding: 6px 14px;
+            }
+
+            table {
+                font-size: 12px;
+                min-width: 400px;
+            }
+
+            .slide h2 {
+                font-size: 20px;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 20px;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .slide {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+                <div>
+                    <h1>HIGH SPEED RAIL AUTHORITY</h1>
+                    <div class="subtitle">Facebook Ads Strategy &amp; Plan</div>
+                    <div style="font-size:16px; color:#2a3a4a; margin-top:4px; font-weight:500;">August 2026 – Q1 2027</div>
+                </div>
+                <div style="text-align:right;">
+                    <span class="version-badge">v1.0</span>
+                    <div style="font-size:13px; color:#7a8a9a; margin-top:6px;">July 2026</div>
+                </div>
+            </div>
+            <div class="meta">
+                <span>📱 Community &amp; Stakeholder Engagement Phase</span>
+                <span>📊 18 Slides</span>
+                <span>💰 Tier 2 Recommended</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 1: Executive Summary -->
+        <div class="slide">
+            <div class="slide-number">Slide 1</div>
+            <h2>Executive Summary</h2>
+
+            <p><strong>Campaign Period:</strong> August 2026 – Q1 2027 (6 months)<br />
+            <strong>Primary Channel:</strong> Facebook (Meta) Advertising<br />
+            <strong>Secondary:</strong> Instagram (via Meta ecosystem)</p>
+
+            <h3>Strategic Objectives &amp; KPIs</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Objective</th><th>KPI</th><th>Target</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Brand Awareness &amp; Reach</strong></td>
+                            <td>Unique reach / Impressions</td>
+                            <td>500,000+ corridor residents</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Community Event Registrations</strong></td>
+                            <td>Lead form submissions / Event RSVPs</td>
+                            <td>2,000+ registrations</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Website Traffic</strong></td>
+                            <td>Clicks to hsra.gov.au</td>
+                            <td>20,000+ sessions</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stakeholder Engagement</strong></td>
+                            <td>Video views / Engagement rate</td>
+                            <td>100,000+ views; &gt;3% engagement</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box">
+                All activity drives back to <strong>hsra.gov.au</strong> — the single source of truth
+            </div>
+        </div>
+
+        <!-- SLIDE 2: Hub-and-Spoke Model -->
+        <div class="slide">
+            <div class="slide-number">Slide 2</div>
+            <h2>Hub-and-Spoke Model</h2>
+
+            <div class="hub-spoke">
+                <div class="hub">
+                    hsra.gov.au
+                    <small>The Hub — Single Source of Truth</small>
+                </div>
+                <div class="arrow-down">⬇</div>
+                <div class="spoke-row">
+                    <div class="spoke primary">Facebook<br /><small>(Primary)</small></div>
+                    <div class="spoke">Instagram<br /><small>(Visual)</small></div>
+                    <div class="spoke">LinkedIn<br /><small>(Professional)</small></div>
+                </div>
+                <div class="arrow-down" style="font-size:14px; color:#9aabba;">⬇</div>
+                <div class="spoke-row">
+                    <div class="spoke">Reddit<br /><small>(Transparent)</small></div>
+                    <div class="spoke">YouTube<br /><small>(Long-form)</small></div>
+                </div>
+                <div style="margin-top:12px; font-size:13px; color:#5a6a7a;">
+                    Paid + Organic → All roads lead to hsra.gov.au
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: Geographic Targeting Zones -->
+        <div class="slide">
+            <div class="slide-number">Slide 3</div>
+            <h2>Geographic Targeting Zones</h2>
+
+            <div class="two-col">
+                <div class="col" style="border-left:4px solid #1a2a4a;">
+                    <h4 style="border-bottom-color:#1a2a4a;">🔵 ZONE A: HUNTER / NEWCASTLE</h4>
+                    <ul>
+                        <li>City of Newcastle</li>
+                        <li>Charlestown</li>
+                        <li>Broadmeadow</li>
+                        <li>Maitland</li>
+                        <li><strong>Always-On Core</strong></li>
+                        <li>Median Age: 34–38</li>
+                        <li>Ad Spend Split: 50%</li>
+                    </ul>
+                </div>
+                <div class="col" style="border-left:4px solid #2d8f8f;">
+                    <h4 style="border-bottom-color:#2d8f8f;">🟢 ZONE B: CENTRAL COAST</h4>
+                    <ul>
+                        <li>Gosford</li>
+                        <li>Tuggerah</li>
+                        <li>Wyong</li>
+                        <li>Woy Woy</li>
+                        <li><strong>Always-On Core</strong></li>
+                        <li>Median Age: 44–47</li>
+                        <li>Ad Spend Split: 50%</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="background:#f5f0f8; border-radius:8px; padding:16px 20px; margin-top:12px; border-left:4px solid #6a4a8a;">
+                <h4 style="margin:0 0 6px 0; color:#1a2a4a;">🟣 ZONE C: SYDNEY METRO (Event Spike Only)</h4>
+                <ul style="margin:0 0 0 20px; color:#2a3a4a;">
+                    <li>Sydney CBD, Inner West, North Shore</li>
+                    <li>Event-Specific Windows Only</li>
+                    <li>Ad Spend: Incremental during key events</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: Audience Segments -->
+        <div class="slide">
+            <div class="slide-number">Slide 4</div>
+            <h2>Audience Segments</h2>
+
+            <div style="background:#f0f4f8; border-radius:8px; padding:16px 20px; margin:12px 0; border-left:4px solid #1a2a4a;">
+                <h4 style="margin:0 0 8px 0; color:#1a2a4a;">❄️ COLD AUDIENCES (Prospecting)</h4>
+                <ul style="margin:0 0 0 20px; color:#2a3a4a;">
+                    <li>Residents aged 25–65 within 30km of corridor postcodes</li>
+                    <li>Interest: Local community, infrastructure, public transport, urban development</li>
+                    <li>Demographic layering: Zone A skews 25–45; Zone B skews 45–65</li>
+                    <li>Parents with children (Newcastle for Kids overlap)</li>
+                </ul>
+            </div>
+
+            <div style="background:#f0f8f6; border-radius:8px; padding:16px 20px; margin:12px 0; border-left:4px solid #2d8f8f;">
+                <h4 style="margin:0 0 8px 0; color:#1a2a4a;">🔥 WARM AUDIENCES (Retargeting — Post Pixel)</h4>
+                <ul style="margin:0 0 0 20px; color:#2a3a4a;">
+                    <li>Website visitors — 30-day window</li>
+                    <li>Video viewers — 25%, 50%, 75% thresholds</li>
+                    <li>Facebook Page engagers — 90-day window</li>
+                    <li>Event responders on Facebook</li>
+                </ul>
+            </div>
+
+            <div style="background:#f5f0f8; border-radius:8px; padding:16px 20px; margin:12px 0; border-left:4px solid #6a4a8a;">
+                <h4 style="margin:0 0 8px 0; color:#1a2a4a;">👥 LOOKALIKE AUDIENCES</h4>
+                <ul style="margin:0 0 0 20px; color:#2a3a4a;">
+                    <li>1%–3% LAL of website visitors (AUS)</li>
+                    <li>1% LAL of lead form completers</li>
+                    <li>2% LAL of video viewers (75%+)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: Campaign Architecture -->
+        <div class="slide">
+            <div class="slide-number">Slide 5</div>
+            <h2>Campaign Architecture</h2>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Campaign</th><th>Objective</th><th>Primary Format</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>01 — Awareness (Always-On)</strong></td>
+                            <td>Reach / Brand Awareness</td>
+                            <td>Video, Single Image</td>
+                        </tr>
+                        <tr>
+                            <td><strong>02 — Event Registrations</strong></td>
+                            <td>Leads / Event Response</td>
+                            <td>Lead Ads, Event Response</td>
+                        </tr>
+                        <tr>
+                            <td><strong>03 — Website Traffic</strong></td>
+                            <td>Traffic</td>
+                            <td>Single Image, Carousel</td>
+                        </tr>
+                        <tr>
+                            <td><strong>04 — Metro Spikes</strong></td>
+                            <td>Reach / Traffic</td>
+                            <td>Video, Single Image</td>
+                        </tr>
+                        <tr>
+                            <td><strong>05 — Retargeting</strong></td>
+                            <td>Conversions / Traffic</td>
+                            <td>Carousel, Single Image</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="background:#f0f4f8; border-radius:8px; padding:12px 20px; margin-top:12px; text-align:center;">
+                <strong>Funnel Flow:</strong>
+                Awareness <span style="color:#7a8a9a;">→</span> Consideration <span style="color:#7a8a9a;">→</span> Conversion <span style="color:#7a8a9a;">→</span> Retention
+                <br /><span style="font-size:13px; color:#5a6a7a;">(Campaign 01) → (Campaign 03) → (Campaign 02) → (Campaign 05)</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: Ad Formats -->
+        <div class="slide">
+            <div class="slide-number">Slide 6</div>
+            <h2>Ad Formats Comparison</h2>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Format</th><th>Best For</th><th>Est. CPM (AUD)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Video Ads (15–30s)</strong></td>
+                            <td>Awareness, Progress Pulse, Event Teasers</td>
+                            <td>$6–$10 corridor / $20–$35 metro</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Single Image Ads</strong></td>
+                            <td>Event Announcements, Detour Alerts, Consultation Notices</td>
+                            <td>$5–$9 corridor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Carousel Ads</strong></td>
+                            <td>Multi-stop corridor updates, Before/After Milestones</td>
+                            <td>$6–$11 corridor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lead Generation Ads</strong></td>
+                            <td>Event Registrations, Newsletter Sign-ups</td>
+                            <td>$8–$15 corridor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Instant Experience (Canvas)</strong></td>
+                            <td>Deep-dive project storytelling, Interactive maps</td>
+                            <td>$7–$12 corridor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Event Response Ads</strong></td>
+                            <td>Driving RSVPs to Facebook-hosted events</td>
+                            <td>$6–$10 corridor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Boosted Posts</strong></td>
+                            <td>Amplifying high-performing organic page content</td>
+                            <td>$5–$8 corridor</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: Budget Tiers -->
+        <div class="slide">
+            <div class="slide-number">Slide 7</div>
+            <h2>Budget Tier Comparison</h2>
+
+            <div class="budget-tier">
+                <div class="tier-card">
+                    <h4>TIER 1: LEAN</h4>
+                    <div class="price">$21,000 <small>total</small></div>
+                    <div style="font-size:13px; color:#5a6a7a;">~$3,500/month</div>
+                    <div class="budget-bar"><div class="fill lean"></div></div>
+                    <ul>
+                        <li>Foundational presence</li>
+                        <li>Always-on awareness</li>
+                        <li>Basic event promotion</li>
+                    </ul>
+                </div>
+
+                <div class="tier-card recommended">
+                    <div class="badge-rec">★ RECOMMENDED</div>
+                    <h4>TIER 2: RECOMMENDED</h4>
+                    <div class="price">$36,000 <small>total</small></div>
+                    <div style="font-size:13px; color:#5a6a7a;">~$6,000/month</div>
+                    <div class="budget-bar"><div class="fill recommended"></div></div>
+                    <ul>
+                        <li><strong>Activates metro spikes</strong></li>
+                        <li><strong>Strong retargeting</strong></li>
+                        <li><strong>All 50+ events</strong></li>
+                        <li>Best value for investment</li>
+                    </ul>
+                </div>
+
+                <div class="tier-card">
+                    <h4>TIER 3: FULL</h4>
+                    <div class="price">$68,000+ <small>total</small></div>
+                    <div style="font-size:13px; color:#5a6a7a;">~$12,000/month</div>
+                    <div class="budget-bar"><div class="fill full"></div></div>
+                    <ul>
+                        <li>Full activation</li>
+                        <li>Lookalike campaigns</li>
+                        <li>Instant Experience</li>
+                        <li>Continuous metro presence</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="text-align:center;">
+                <strong>Tier 2 Recommended:</strong> Best balance of reach, engagement, and cost efficiency
+            </div>
+        </div>
+
+        <!-- SLIDE 8: Recommended Tier Detail -->
+        <div class="slide">
+            <div class="slide-number">Slide 8</div>
+            <h2>Tier 2 — Recommended Budget Breakdown</h2>
+
+            <p><strong>Monthly Budget:</strong> ~$6,000 &nbsp;|&nbsp; <strong>6-Month Total:</strong> ~$36,000</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Campaign</th><th>Monthly</th><th>6-Month</th><th>Notes</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>01 — Awareness Always-On</strong></td>
+                            <td>$2,500</td>
+                            <td>$15,000</td>
+                            <td>Zone A + Zone B optimised video</td>
+                        </tr>
+                        <tr>
+                            <td><strong>02 — Event Registrations</strong></td>
+                            <td>$1,500</td>
+                            <td>$9,000</td>
+                            <td>Lead ads for all 50+ events</td>
+                        </tr>
+                        <tr>
+                            <td><strong>03 — Website Traffic</strong></td>
+                            <td>$800</td>
+                            <td>$4,800</td>
+                            <td>Corridor + retargeting</td>
+                        </tr>
+                        <tr>
+                            <td><strong>04 — Metro Spikes</strong></td>
+                            <td>$500 avg (event months)</td>
+                            <td>$2,000</td>
+                            <td>Sep, Oct, Nov, Dec 2026 only</td>
+                        </tr>
+                        <tr>
+                            <td><strong>05 — Retargeting</strong></td>
+                            <td>$700</td>
+                            <td>$4,200</td>
+                            <td>Video viewers + site visitors</td>
+                        </tr>
+                        <tr style="font-weight:700; background:#f0f8f6;">
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong>~$6,000</strong></td>
+                            <td><strong>~$35,000</strong></td>
+                            <td>approx. with spike variation</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:12px;">
+                <span class="badge badge-high">✓ Covers all 50+ events</span>
+                <span class="badge badge-medium">✓ Metro spikes active</span>
+                <span class="badge badge-medium">✓ Strong retargeting</span>
+                <span class="badge badge-high">✓ Best value</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: Metro Spikes -->
+        <div class="slide">
+            <div class="slide-number">Slide 9</div>
+            <h2>Metro Event Spike Windows</h2>
+
+            <p>Incremental metro budget on top of base corridor spend:</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Event Window</th><th>Active Period</th><th>Budget Increment</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Event 1 — 1 Sep 2026</td><td>15 Aug – 31 Aug 2026</td><td>+$500–$2,000</td></tr>
+                        <tr><td>Event 2 — 1 Oct 2026</td><td>15 Sep – 30 Sep 2026</td><td>+$500–$2,000</td></tr>
+                        <tr><td>Event 3 — 1 Nov 2026</td><td>15 Oct – 31 Oct 2026</td><td>+$500–$2,000</td></tr>
+                        <tr><td>Event 4 — 1 Dec 2026</td><td>15 Nov – 30 Nov 2026</td><td>+$500–$2,000</td></tr>
+                        <tr><td>Q1 2027 Events</td><td>Jan–Mar 2027 (rolling)</td><td>+$500–$1,500/month</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top:12px;">
+                <div style="font-size:13px; font-weight:600; color:#1a2a4a; margin-bottom:6px;">Timeline Visual:</div>
+                <div class="timeline-visual">
+                    <span class="month">Aug</span>
+                    <span class="month active">Sep ██</span>
+                    <span class="month active">Oct ██</span>
+                    <span class="month active">Nov ██</span>
+                    <span class="month active">Dec ██</span>
+                    <span class="month">Jan</span>
+                    <span class="month">Feb</span>
+                    <span class="month">Mar</span>
+                </div>
+                <div style="font-size:12px; color:#5a6a7a;">█ Metro spikes active</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: Content Pillars -->
+        <div class="slide">
+            <div class="slide-number">Slide 10</div>
+            <h2>Content Pillars</h2>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0;">
+                <div style="background:#f0f4f8; padding:14px 18px; border-radius:8px; border-left:4px solid #1a2a4a;">
+                    <h4 style="margin:0 0 4px 0; font-size:15px;">📈 Progress Pulse</h4>
+                    <div style="font-size:13px; color:#3a4a5a;">Construction milestones, drone footage, time-lapse</div>
+                    <div style="font-size:12px; color:#5a6a7a; margin-top:4px;">Weekly | Video / Single Image</div>
+                </div>
+                <div style="background:#f0f8f6; padding:14px 18px; border-radius:8px; border-left:4px solid #2d8f8f;">
+                    <h4 style="margin:0 0 4px 0; font-size:15px;">🏘️ Community Impact</h4>
+                    <div style="font-size:13px; color:#3a4a5a;">Route maps, detour alerts, business spotlights</div>
+                    <div style="font-size:12px; color:#5a6a7a; margin-top:4px;">Fortnightly | Carousel / Image</div>
+                </div>
+                <div style="background:#f5f0f8; padding:14px 18px; border-radius:8px; border-left:4px solid #6a4a8a;">
+                    <h4 style="margin:0 0 4px 0; font-size:15px;">🔬 Expert Insight</h4>
+                    <div style="font-size:13px; color:#3a4a5a;">Engineer Q&As, explainer videos, technical FAQs</div>
+                    <div style="font-size:12px; color:#5a6a7a; margin-top:4px;">Monthly | Video / Instant Experience</div>
+                </div>
+                <div style="background:#f0f0f8; padding:14px 18px; border-radius:8px; border-left:4px solid #4a5a8a;">
+                    <h4 style="margin:0 0 4px 0; font-size:15px;">📋 Stakeholder Action</h4>
+                    <div style="font-size:13px; color:#3a4a5a;">Event invites, lead form CTAs, consultation notices</div>
+                    <div style="font-size:12px; color:#5a6a7a; margin-top:4px;">Per event | Lead Ad / Event Ad</div>
+                </div>
+            </div>
+
+            <div style="background:#f8fafc; border-radius:8px; padding:12px 18px; border:1px solid #e8ecf2; text-align:center; font-size:14px; color:#3a4a5a;">
+                ~50 scheduled content updates overall (~1 per 5–7 days)<br />
+                <span style="font-size:13px; color:#5a6a7a;">Paid amplification applied to highest-performing organic posts</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: Monthly Calendar -->
+        <div class="slide">
+            <div class="slide-number">Slide 11</div>
+            <h2>Monthly Content Calendar Example: September 2026</h2>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Week</th><th>Organic Post</th><th>Paid Amplification</th><th>CTA</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Week 1<br />(1–7 Sep)</strong></td>
+                            <td>Progress Pulse: Construction update video</td>
+                            <td>Boost to Zone A + Zone B, $300</td>
+                            <td>Visit hsra.gov.au</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Week 2<br />(8–14 Sep)</strong></td>
+                            <td>Community Impact: Detour alert infographic</td>
+                            <td>Traffic ad to affected suburbs, $200</td>
+                            <td>Download detour map</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Week 3<br />(15–21 Sep)</strong></td>
+                            <td>Expert Insight: Engineer video Q&A</td>
+                            <td>Video views campaign, corridor, $400</td>
+                            <td>Submit your question</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Week 4<br />(22–28 Sep)</strong></td>
+                            <td>Event Promo: Oct community session</td>
+                            <td>Lead Gen Ad, all zones + metro spike, $500+</td>
+                            <td>Register your spot</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: Creative Specs -->
+        <div class="slide">
+            <div class="slide-number">Slide 12</div>
+            <h2>Creative Specifications</h2>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Format</th><th>Size</th><th>Video Length</th><th>Headline</th><th>Text</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Feed Video</strong></td>
+                            <td>1080×1080 or 1920×1080</td>
+                            <td>15–30 sec (subtitles)</td>
+                            <td>27 chars</td>
+                            <td>125 chars</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feed Image</strong></td>
+                            <td>1080×1080 or 1200×628</td>
+                            <td>N/A</td>
+                            <td>27 chars</td>
+                            <td>125 chars</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Carousel</strong></td>
+                            <td>1080×1080 per card</td>
+                            <td>N/A</td>
+                            <td>27 chars/card</td>
+                            <td>125 chars</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stories/Reels</strong></td>
+                            <td>1080×1920 (9:16)</td>
+                            <td>15 sec max</td>
+                            <td>27 chars</td>
+                            <td>125 chars</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lead Ad</strong></td>
+                            <td>1080×1080 or 1200×628</td>
+                            <td>N/A</td>
+                            <td>27 chars</td>
+                            <td>125 chars</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="background:#f8fafc; border-radius:8px; padding:12px 18px; border:1px solid #e8ecf2; margin-top:12px; font-size:14px;">
+                <strong>Requirements:</strong>
+                <ul style="margin:6px 0 0 20px; color:#3a4a5a;">
+                    <li>HSRA branding on all assets</li>
+                    <li>Compliant with NSW Government visual identity guidelines</li>
+                    <li>Less than 20% text overlay on image-based formats (Meta restriction)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: Measurement -->
+        <div class="slide">
+            <div class="slide-number">Slide 13</div>
+            <h2>Measurement &amp; KPI Framework</h2>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Metric</th><th>Tool</th><th>Target</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Reach</strong></td><td>Meta Ads Manager</td><td>500,000+ corridor reach by Q1 2027</td></tr>
+                        <tr><td><strong>Impressions</strong></td><td>Meta Ads Manager</td><td>2M+ over period</td></tr>
+                        <tr><td><strong>CPM</strong></td><td>Meta Ads Manager</td><td>&lt;$12 corridor avg; &lt;$38 metro</td></tr>
+                        <tr><td><strong>CTR</strong></td><td>Meta Ads Manager</td><td>&gt;1.5% (industry avg: 0.9%)</td></tr>
+                        <tr><td><strong>CPC</strong></td><td>Meta Ads Manager</td><td>&lt;$2.00 corridor; &lt;$5.00 metro</td></tr>
+                        <tr><td><strong>Lead Form Submissions</strong></td><td>Meta Ads Manager</td><td>40+ per event minimum</td></tr>
+                        <tr><td><strong>Video View Rate (25%+)</strong></td><td>Meta Ads Manager</td><td>&gt;30%</td></tr>
+                        <tr><td><strong>Website Sessions from Paid Social</strong></td><td>GA4 (via GTM)</td><td>20,000+ over period</td></tr>
+                        <tr><td><strong>Conversion Rate (form → website)</strong></td><td>GA4 + Meta</td><td>&gt;3%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SLIDE 14: Reporting Cadence -->
+        <div class="slide">
+            <div class="slide-number">Slide 14</div>
+            <h2>Reporting Cadence</h2>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Frequency</th><th>Scope</th><th>Audience</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Weekly</strong></td>
+                            <td>Internal Meta Ads Manager review — reach, spend pacing, top-performing creatives</td>
+                            <td>Digital Team</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Monthly</strong></td>
+                            <td>Cross-channel report (Facebook + GA4) — executive 1-pager</td>
+                            <td>HSRA Leadership</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Per-Event</strong></td>
+                            <td>Lead generation and RSVP report within 48 hours of event promotion</td>
+                            <td>Digital Team + Engagement Team</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quarterly</strong></td>
+                            <td>Full campaign review, audience refresh, creative fatigue assessment</td>
+                            <td>Digital Team + Leadership</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+                <span class="badge badge-high">Weekly</span>
+                <span class="badge badge-medium">Monthly</span>
+                <span class="badge badge-medium">Per-Event</span>
+                <span class="badge badge-low">Quarterly</span>
+                <span style="font-size:13px; color:#5a6a7a; margin-left:4px;">Team → Exec → Ops → Strategy</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 15: Compliance -->
+        <div class="slide">
+            <div class="slide-number">Slide 15</div>
+            <h2>Compliance &amp; Governance</h2>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Requirement</th><th>Action</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Meta's Advertising Policies</strong></td><td>All ads comply with Meta policies</td></tr>
+                        <tr><td><strong>Australian Privacy Act 1988</strong></td><td>Privacy Policy updated to disclose Meta Pixel data collection</td></tr>
+                        <tr><td><strong>NSW Government Digital Information Security Policy</strong></td><td>All systems and data handling compliant</td></tr>
+                        <tr><td><strong>Unconfirmed Project Commitments</strong></td><td>All copy reviewed by Communications and Legal before publishing</td></tr>
+                        <tr><td><strong>Ad Account Ownership</strong></td><td>Account owned by HSRA (not agency) — agency access via Business Manager only</td></tr>
+                        <tr><td><strong>Two-Factor Authentication (2FA)</strong></td><td>Enabled on all Meta Business Manager users</td></tr>
+                        <tr><td><strong>Creative &amp; Copy Approval</strong></td><td>Minimum 5 business days before publish date for all new campaign launches</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SLIDE 16: Summary -->
+        <div class="slide">
+            <div class="slide-number">Slide 16</div>
+            <h2>Summary &amp; Next Steps</h2>
+
+            <h3>Key Takeaways</h3>
+            <ul style="margin:8px 0 16px 24px; color:#2a3a4a;">
+                <li>✓ Facebook is the primary paid channel for community engagement</li>
+                <li>✓ Hub-and-spoke model drives all traffic to hsra.gov.au</li>
+                <li>✓ Recommended budget: <strong>Tier 2 (~$36,000 over 6 months)</strong></li>
+                <li>✓ Two geographic zones with distinct messaging approaches</li>
+                <li>✓ 50+ events supported by consistent communications template</li>
+                <li>✓ Measurement framework tracks reach, engagement, conversion</li>
+            </ul>
+
+            <h3>Next Steps</h3>
+            <div style="background:#f0f4f8; border-radius:8px; padding:16px 20px;">
+                <ol style="margin:0 0 0 20px; color:#2a3a4a;">
+                    <li>Finalise budget approval for Tier 2 recommended spend</li>
+                    <li>Set up Meta Pixel via GTM (privacy policy update required)</li>
+                    <li>Create initial creative assets (video, images, copy)</li>
+                    <li>Establish reporting dashboards (weekly/monthly)</li>
+                    <li>Begin August event promotions (T-21 days from first event)</li>
+                </ol>
+            </div>
+
+            <div style="margin-top:16px; padding:12px 18px; background:#e8ecf2; border-radius:8px; text-align:center; font-size:14px; color:#1a2a4a;">
+                Aug 2026 <span style="color:#7a8a9a;">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> Q1 2027<br />
+                <span style="font-size:12px; color:#2d8f8f; font-weight:600;">███ Campaign Launch</span>
+                <span style="font-size:12px; color:#7a8a9a;">████████████████████████████████</span>
+                <span style="font-size:12px; color:#1a2a4a; font-weight:600;">Campaign End</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 17: Thank You -->
+        <div class="slide">
+            <div class="slide-number">Slide 17</div>
+            <h2 style="border-left-color:transparent; text-align:center; font-size:32px; padding-left:0;">Thank You</h2>
+
+            <div style="text-align:center; padding:20px 0;">
+                <div style="font-size:18px; font-weight:600; color:#1a2a4a;">HIGH SPEED RAIL AUTHORITY</div>
+                <div style="font-size:14px; color:#4a5a7a;">Facebook Ads Strategy &amp; Plan</div>
+                <div style="margin-top:12px; font-size:13px; color:#7a8a9a;">Version 1.0 | July 2026</div>
+                <div style="margin-top:20px; padding:16px; background:#f8fafc; border-radius:8px; border:1px solid #e8ecf2; font-size:14px; color:#3a4a5a;">
+                    For questions or clarifications:<br />
+                    <strong>HSRA Digital Team</strong><br />
+                    <span style="color:#7a8a9a;">[Contact details to be inserted]</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <span><strong>HIGH SPEED RAIL AUTHORITY</strong> — Facebook Ads Strategy</span>
+            <span>Version 1.0 &bull; July 2026</span>
+        </div>
+
+    </div>
+
+</body>
+</html>
